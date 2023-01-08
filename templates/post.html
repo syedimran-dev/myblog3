@@ -1,0 +1,87 @@
+{% from 'bootstrap5/form.html' import render_form %}
+<!doctype html>
+<html lang="en">
+<head>
+    {% block head %}
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {% block styles %}
+    <!-- Bootstrap CSS -->
+    {{ bootstrap.load_css() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+    {% endblock %}
+
+    <title>Your page title</title>
+    {% endblock %}
+</head>
+<body>
+<!-- Your page content -->
+{% block content %}
+{% include 'header.html' %}
+<main>
+    <section class="post"
+             style="background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url({{post.img_url}})">
+        <div class="container h-100">
+            <div class="row align-items-center h-100">
+                <div class="col-md-12  text-white post-title">
+                    <h1>{{post.title}}</h1>
+                    <h2>{{post.subtitle}}</h2>
+                    <h6>Created by {{post.author.name}} on {{post.date}}</h6>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="h-auto py-5">
+        <div class="container h-100">
+            <div class="row align-items-center h-100">
+                <div class="col-md-12">
+                    <h1 class="mb-5">Post Description</h1>
+                    <p>
+                        {{post.body|safe}}
+                    </p>
+                </div>
+                <div class="col-md-12">
+                    {% if current_user.id == 1 %}
+                    <a href="{{ url_for('edit_post',  post_id=post.id) }}"
+                       class="btn btn-success btn-lg float-end  mt-3">Edit Post</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="comments py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    {{ ckeditor.load() }}
+                    {{ ckeditor.config(name='comment_text') }}
+                    {{ render_form(form) }}
+                </div>
+                <div class="col-md-6">
+                    {% for comment in post.comments %}
+                    <div class="user-comments py-5">
+                        <img style="width:10%; border-radius:100%;" src="{{ url_for('static', filename='images/undraw_Hello_re_3evm.png') }}">
+                        <h3>{{comment.comment|safe}}</h3>
+                        <p>{{comment.author.name}}</p>
+
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+
+
+    </section>
+
+</main>
+{% endblock %}
+
+{% block scripts %}
+<!-- Optional JavaScript -->
+{{ bootstrap.load_js() }}
+{% endblock %}
+</body>
+</html>

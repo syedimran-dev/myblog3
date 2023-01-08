@@ -1,0 +1,31 @@
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+.hero {
+height: 80vh;
+}
+
+.post{
+height: 70vh;
+}
+
+.post-card a:first-child{
+text-decoration: none;
+color: #000;
+}
+
+.post-title h1{
+font-size: 90px;
+}
+
+.hello-img img{
+width: 100%;
+}
+
+.user-comments img{
+width: 10%
+border-radius: 50%;
+}

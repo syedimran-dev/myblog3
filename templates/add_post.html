@@ -1,0 +1,46 @@
+{% from 'bootstrap5/form.html' import render_form %}
+<!doctype html>
+<html lang="en">
+<head>
+    {% block head %}
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {% block styles %}
+    <!-- Bootstrap CSS -->
+    {{ bootstrap.load_css() }}
+    {% endblock %}
+
+    <title>Add POST</title>
+    {% endblock %}
+</head>
+<body>
+<!-- Your page content -->
+{% block content %}
+<div class="container py-5">
+    hsadas
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="mb-4">
+                {% if is_edit %}
+                Edit Post
+                {% else %}
+                Add Post
+                {% endif %}
+            </h1>
+            {{ ckeditor.load() }}
+            {{ ckeditor.config(name='body') }}
+            {{ render_form(form) }}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<!-- Optional JavaScript -->
+{{ bootstrap.load_js() }}
+{% endblock %}
+</body>
+</html>
